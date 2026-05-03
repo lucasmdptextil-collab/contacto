@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucas Mejica</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    background: #0d0d0d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+    overflow: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 30% 20%, rgba(180,150,90,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 75% 80%, rgba(180,150,90,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .card {
+    width: 340px;
+    background: #111111;
+    border: 1px solid rgba(180,150,90,0.25);
+    border-radius: 20px;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-header {
+    background: linear-gradient(145deg, #1a1a1a 0%, #141414 100%);
+    border-bottom: 1px solid rgba(180,150,90,0.15);
+    padding: 36px 28px 28px;
+    text-align: center;
+    position: relative;
+  }
+
+  .card-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(180,150,90,0.6), transparent);
+  }
+
+  .avatar {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: #1e1e1e;
+    border: 1.5px solid rgba(180,150,90,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    position: relative;
+  }
+
+  .avatar::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1px solid rgba(180,150,90,0.12);
+  }
+
+  .avatar-initials {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 500;
+    color: #c9a85c;
+    letter-spacing: 2px;
+  }
+
+  .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: #f0ece4;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  .tagline {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(180,150,90,0.7);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+  }
+
+  .card-body {
+    padding: 24px 28px;
+  }
+
+  .info-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .info-row:last-child { border-bottom: none; }
+
+  .info-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: rgba(180,150,90,0.08);
+    border: 1px solid rgba(180,150,90,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .info-icon svg { width: 15px; height: 15px; }
+
+  .info-label {
+    font-size: 10px;
+    color: rgba(180,150,90,0.6);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .info-value {
+    font-size: 13.5px;
+    color: #c8c4bc;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+  }
+
+  .card-actions {
+    padding: 0 28px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    transition: transform 0.15s ease, opacity 0.15s ease, background 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn:active { transform: scale(0.97); }
+
+  .btn-whatsapp {
+    background: #1f8c4e;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .btn-whatsapp:hover { background: #239459; }
+
+  .btn-save {
+    background: rgba(180,150,90,0.1);
+    color: #c9a85c;
+    border: 1px solid rgba(180,150,90,0.3);
+  }
+
+  .btn-save:hover { background: rgba(180,150,90,0.18); }
+
+  .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 28px;
+    margin-bottom: 10px;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .divider-text {
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .card-footer {
+    padding: 14px 28px 20px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .footer-text {
+    font-size: 10px;
+    color: rgba(255,255,255,0.15);
+    letter-spacing: 1px;
+  }
+
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    background: rgba(255,255,255,0.12);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+  }
+
+  @keyframes ripple {
+    to { transform: scale(3); opacity: 0; }
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: #1e1e1e;
+    border: 1px solid rgba(180,150,90,0.3);
+    color: #c9a85c;
+    padding: 10px 20px;
+    border-radius: 40px;
+    font-size: 12px;
+    font-family: 'DM Sans', sans-serif;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-header">
+    <div class="avatar">
+      <span class="avatar-initials">LM</span>
+    </div>
+    <h1 class="name">Lucas Mejica</h1>
+    <p class="tagline">Mar del Plata &nbsp;·&nbsp; Argentina</p>
+  </div>
+
+  <div class="card-body">
+    <div class="info-row">
+      <div class="info-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#c9a85c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.7A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="info-label">WhatsApp</div>
+        <div class="info-value">+54 223 577-6876</div>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="info-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#c9a85c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+      </div>
+      <div>
+        <div class="info-label">Ubicación</div>
+        <div class="info-value">Mar del Plata, Argentina</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-actions">
+    <a class="btn btn-whatsapp" href="https://wa.me/542235776876" id="btn-wa">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.118 1.528 5.849L.057 23.625a.75.75 0 00.918.918l5.776-1.471A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.734 9.734 0 01-4.962-1.355l-.355-.21-3.681.937.956-3.594-.231-.37A9.72 9.72 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/>
+      </svg>
+      Enviar mensaje por WhatsApp
+    </a>
+
+    <button class="btn btn-save" id="btn-save">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+      </svg>
+      Guardar en contactos
+    </button>
+  </div>
+
+  <div class="card-footer">
+    <p class="footer-text">Toca para conectar</p>
+  </div>
+</div>
+
+<div class="toast" id="toast">Contacto guardado</div>
+
+<script>
+  function addRipple(btn, e) {
+    const rect = btn.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    ripple.classList.add('ripple');
+    ripple.style.left = (e.clientX - rect.left - 50) + 'px';
+    ripple.style.top = (e.clientY - rect.top - 50) + 'px';
+    btn.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 700);
+  }
+
+  document.getElementById('btn-wa').addEventListener('click', function(e) {
+    addRipple(this, e);
+  });
+
+  document.getElementById('btn-save').addEventListener('click', function(e) {
+    addRipple(this, e);
+
+    const vcard =
+      'BEGIN:VCARD\r\n' +
+      'VERSION:3.0\r\n' +
+      'FN:Lucas Mejica\r\n' +
+      'N:Mejica;Lucas;;;\r\n' +
+      'TEL;TYPE=CELL,VOICE:+542235776876\r\n' +
+      'ADR;TYPE=HOME:;;Mar del Plata;;Buenos Aires;;Argentina\r\n' +
+      'END:VCARD';
+
+    const blob = new Blob([vcard], { type: 'text/vcard' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Lucas_Mejica.vcf';
+    a.click();
+    URL.revokeObjectURL(url);
+
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  });
+</script>
+</body>
+</html>
